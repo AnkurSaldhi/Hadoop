@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+
+import sys
+
+salesTotal = 0
+oldKey = None
+
+#print "hello"
+
+for line in sys.stdin:
+    #print line
+    data = line.strip().split("\t")
+    if len(data) != 2:
+        # Something has gone wrong. Skip this line.
+        continue
+
+    thisKey, thisSale = data
+    if oldKey and oldKey != thisKey:
+   	 print oldKey, "\t", salesTotal
+     	 oldKey = thisKey
+     	 salesTotal = 0
+
+    oldKey = thisKey
+    salesTotal += float(thisSale)
+
+if oldKey != None:
+	print oldKey, "\t", salesTotal
